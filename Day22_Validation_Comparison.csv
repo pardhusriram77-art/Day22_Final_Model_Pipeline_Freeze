@@ -1,0 +1,6 @@
+candidate,features,validation_rows,validation_MAE,validation_RMSE
+linear_regression_pH_only,1,416,1.2597636888229853,1.5782443608673642
+constant_median_baseline,1,416,1.2597809739381343,1.5782601576689206
+random_forest_pH_only,1,416,1.2820643437087271,1.5939778329911432
+random_forest_full_9_features,9,416,1.2944107828103069,1.6170063304340543
+persistence_current_pH,1,416,1.6004675997749567,2.078318784757005

@@ -1,0 +1,4 @@
+split,start_row_index,end_row_index_exclusive,rows,start_timestamp,end_timestamp
+train,0,1939,1939,2024-01-01 00:00:00,2024-04-09 21:00:00
+validation,1939,2355,416,2024-04-09 22:00:00,2024-05-01 19:00:00
+test,2355,2771,416,2024-05-01 20:00:00,2024-05-22 11:00:00

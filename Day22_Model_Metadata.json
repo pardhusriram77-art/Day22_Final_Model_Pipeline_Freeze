@@ -1,0 +1,157 @@
+{
+  "day": 22,
+  "status": "frozen_final_candidate",
+  "selected_method": "pH-only Linear Regression with median imputation",
+  "target": "next row's pH (ph.shift(-1))",
+  "features": [
+    "ph"
+  ],
+  "source_file": "water_potability_temporal_synthetic.csv",
+  "source_rows": 3276,
+  "valid_timestamp_rows": 3260,
+  "supervised_rows": 2771,
+  "split": {
+    "method": "chronological/no shuffle",
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15,
+    "test_fraction": 0.15,
+    "train_rows": 1939,
+    "validation_rows": 416,
+    "test_rows": 416
+  },
+  "preprocessing": {
+    "timestamp_parse": "to_datetime(errors='coerce')",
+    "invalid_timestamps": "drop",
+    "sort": "stable ascending",
+    "target": "next-row ph",
+    "imputer": "median, fitted within pipeline",
+    "scaling": "none"
+  },
+  "model": {
+    "pipeline_steps": [
+      "SimpleImputer(strategy='median')",
+      "LinearRegression()"
+    ]
+  },
+  "validation_comparison": [
+    {
+      "candidate": "linear_regression_pH_only",
+      "features": 1,
+      "validation_rows": 416,
+      "validation_MAE": 1.2597636888229853,
+      "validation_RMSE": 1.5782443608673642
+    },
+    {
+      "candidate": "constant_median_baseline",
+      "features": 1,
+      "validation_rows": 416,
+      "validation_MAE": 1.2597809739381343,
+      "validation_RMSE": 1.5782601576689206
+    },
+    {
+      "candidate": "random_forest_pH_only",
+      "features": 1,
+      "validation_rows": 416,
+      "validation_MAE": 1.2820643437087271,
+      "validation_RMSE": 1.5939778329911432
+    },
+    {
+      "candidate": "random_forest_full_9_features",
+      "features": 9,
+      "validation_rows": 416,
+      "validation_MAE": 1.2944107828103069,
+      "validation_RMSE": 1.6170063304340543
+    },
+    {
+      "candidate": "persistence_current_pH",
+      "features": 1,
+      "validation_rows": 416,
+      "validation_MAE": 1.6004675997749567,
+      "validation_RMSE": 2.078318784757005
+    }
+  ],
+  "validation_window_stability": [
+    {
+      "candidate": "linear_regression_pH_only",
+      "window": 1,
+      "rows": 139,
+      "MAE": 1.1593942876214527,
+      "RMSE": 1.4609785084386324
+    },
+    {
+      "candidate": "linear_regression_pH_only",
+      "window": 2,
+      "rows": 139,
+      "MAE": 1.3676059431246115,
+      "RMSE": 1.6930745085230898
+    },
+    {
+      "candidate": "linear_regression_pH_only",
+      "window": 3,
+      "rows": 138,
+      "MAE": 1.2522366846134696,
+      "RMSE": 1.5720899494052545
+    },
+    {
+      "candidate": "random_forest_pH_only",
+      "window": 1,
+      "rows": 139,
+      "MAE": 1.1770372503525255,
+      "RMSE": 1.4612878620989374
+    },
+    {
+      "candidate": "random_forest_pH_only",
+      "window": 2,
+      "rows": 139,
+      "MAE": 1.3861350173738407,
+      "RMSE": 1.7069606601162903
+    },
+    {
+      "candidate": "random_forest_pH_only",
+      "window": 3,
+      "rows": 138,
+      "MAE": 1.2830276939772864,
+      "RMSE": 1.6041989456493597
+    },
+    {
+      "candidate": "persistence_current_pH",
+      "window": 1,
+      "rows": 139,
+      "MAE": 1.5744747118268603,
+      "RMSE": 2.063071583258029
+    },
+    {
+      "candidate": "persistence_current_pH",
+      "window": 2,
+      "rows": 139,
+      "MAE": 1.7044429021426364,
+      "RMSE": 2.2258511495047784
+    },
+    {
+      "candidate": "persistence_current_pH",
+      "window": 3,
+      "rows": 138,
+      "MAE": 1.5219200953958116,
+      "RMSE": 1.934788180797329
+    }
+  ],
+  "reserved_test": {
+    "MAE": 1.4815340200912186,
+    "RMSE": 1.9004687789585786,
+    "rows": 416,
+    "used_for_selection_or_tuning": false
+  },
+  "environment": {
+    "python": "3.13.5",
+    "pandas": "2.2.3",
+    "scikit_learn": "1.8.0",
+    "joblib": "1.5.3"
+  },
+  "limitations": [
+    "Synthetic timestamps; source dataset is static.",
+    "Next-row pH is a pseudo-temporal target, not a verified future sensor reading.",
+    "No dissolved oxygen or pressure columns.",
+    "No labelled anomaly ground truth; no anomaly precision/recall claims.",
+    "Not validated for operational underwater deployment."
+  ]
+}
